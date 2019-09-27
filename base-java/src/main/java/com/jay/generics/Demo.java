@@ -44,7 +44,7 @@ public class Demo {
      * @return
      * @Author mj
      * @Description 泛型方法, 在方法的返回值前面使用泛型修饰 尖括号<T>，
-     * 若想对类型加入限制。可以使用<T extends ?>
+     * 若想对类型加入限制。可以使用<? extends T>
      * @Date 2019/8/12 14:56
      * @Param
      **/
