@@ -46,5 +46,9 @@ public class ReflectionDemo {
         field.set(userReflect, "18651652132");
         System.out.println("------------------------------------------------");
         System.out.println(userReflect.getMobile());
+
+
+
+
     }
 }
