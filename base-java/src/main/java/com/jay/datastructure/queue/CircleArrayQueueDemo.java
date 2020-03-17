@@ -1,4 +1,4 @@
-package com.jay.datastructure;
+package com.jay.datastructure.queue;
 
 /**
  * 用数组实现环形队列（解决数组普通队列的复用问题）

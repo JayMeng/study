@@ -1,4 +1,4 @@
-package com.jay.datastructure;
+package com.jay.datastructure.queue;
 
 /**
  * 洗漱数组与普通数组的转换

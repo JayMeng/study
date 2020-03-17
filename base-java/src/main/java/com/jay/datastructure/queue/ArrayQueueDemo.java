@@ -1,4 +1,4 @@
-package com.jay.datastructure;
+package com.jay.datastructure.queue;
 
 /**
  * @author jay

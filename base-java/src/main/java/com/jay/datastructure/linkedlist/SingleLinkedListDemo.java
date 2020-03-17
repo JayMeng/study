@@ -17,12 +17,22 @@ public class SingleLinkedListDemo {
         linkedList.addByOrder(node1);
         linkedList.addByOrder(node);
         linkedList.list();
+        linkedList.reverse(linkedList.getHead());
+        linkedList.list();
     }
 }
 
 
 class SingleLinkedList {
     private Node head = new Node(0, "", "");
+
+    public Node getHead() {
+        return head;
+    }
+
+    public void setHead(Node head) {
+        this.head = head;
+    }
 
     public void add(Node node) {
         Node temp = head;
@@ -124,14 +134,14 @@ class SingleLinkedList {
     }
 
 
-    //  获取链表的有效节点个数
+    //  获取链表的有效节点个数(head:链表的头结点)
     public int size(Node head) {
         if (head.next == null) {
             return 0;
         }
         int length = 0;
         Node temp = head.next;
-        while (temp!=null) {
+        while (temp != null) {
             length++;
             temp = temp.next;
         }
@@ -140,13 +150,42 @@ class SingleLinkedList {
 
     //  查询单链表的倒数第 k 个节点的信息
     //  思路，由于单链表只能正向遍历，所以倒数第 k 个 = 正数 （size - k） 个数据 ；两者相加 = size
-    public Node getIndex(Node head,int index){
+    public Node getIndex(Node head, int index) {
+        if (head.next == null) {
+            System.out.println("链表为空");
+            return null;
+        }
+        int size = size(head);
+        Node temp = head.next;
 
+        if (index <= 0 || index > size) {
+            return null;
+        }
 
+        for (int i = 0; i < size - index; i++) { // 比如3个节点，查询倒数第一个，即第三个节点。此时需要注意temp一开始指向第一个节点，只需后移2次即可。所以 i<size-index
+            temp = temp.next;
+        }
+        return temp;
     }
 
-
-
+    //  单链表的反转
+    //  思路：1 正向遍历，同时额外定义一个节点 reverse ;每次遍历时将节点取出并放在reverse的 最前面 ，遍历结束后再将head.next = reverse.next 即可
+    //        2 正向遍历，同时定义 preCode , curNode , nextNode 三个指针，遍历每个节点时，将当前节点的指针域指向前一个节点，之后将定义三个指针往后移动，直至遍历到最后一个节点停止
+    public void reverse(Node head) {
+        if (head.next == null) {
+            System.out.println("链表为空");
+        }
+        Node reverse = new Node(0, "", "");
+        Node cur = head.next;
+        Node next = null;
+        while (cur.next != null) {
+            next = cur.next;
+            cur.next = reverse.next;
+            reverse.next = cur;
+            cur = next;
+        }
+        head.next = reverse.next;
+    }
 }
 
 class Node {
