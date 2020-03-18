@@ -16,8 +16,7 @@ public class SingleLinkedListDemo {
         linkedList.addByOrder(node2);
         linkedList.addByOrder(node1);
         linkedList.addByOrder(node);
-        linkedList.list();
-        linkedList.reverse(linkedList.getHead());
+        linkedList.reverse2(linkedList.getHead());
         linkedList.list();
     }
 }
@@ -171,20 +170,38 @@ class SingleLinkedList {
     //  单链表的反转
     //  思路：1 正向遍历，同时额外定义一个节点 reverse ;每次遍历时将节点取出并放在reverse的 最前面 ，遍历结束后再将head.next = reverse.next 即可
     //        2 正向遍历，同时定义 preCode , curNode , nextNode 三个指针，遍历每个节点时，将当前节点的指针域指向前一个节点，之后将定义三个指针往后移动，直至遍历到最后一个节点停止
-    public void reverse(Node head) {
+    public void reverse1(Node head) {
         if (head.next == null) {
             System.out.println("链表为空");
+            return;
         }
         Node reverse = new Node(0, "", "");
         Node cur = head.next;
         Node next = null;
-        while (cur.next != null) {
+        while (cur != null) {
             next = cur.next;
             cur.next = reverse.next;
             reverse.next = cur;
             cur = next;
         }
         head.next = reverse.next;
+    }
+
+
+    public void reverse2(Node head) {
+        if (head.next == null) {
+            System.out.println("链表为空");
+            return;
+        }
+        Node pre = null;
+        Node cur = head.next;
+        Node next = null;
+        while (cur != null) {
+            next = cur.next;//  nextNode 指向下一个节点
+            cur.next = pre; //将当前节点next域指向前一个节点
+            pre = cur;//preNode 指针向后移动
+            cur = next;//curNode指针向后移动
+        }
     }
 }
 
