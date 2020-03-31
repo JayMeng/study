@@ -201,7 +201,32 @@ class Node {
             }
         }
         //  当添加完一个节点后，需要判断是否需要左旋（右子树的高度-左子树的高度>1）
+        if (rightHeight() - leftHeight() > 1) {
+            if (right != null && right.leftHeight() - right.rightHeight() > 1) {
+                //  先对当前节点的右子节点右旋
+                right.rightRotate();
+                //  左旋
+                leftRotate();
+            } else {
+                //  左旋
+                leftRotate();
+            }
+            //  !!!!这里必须要，不然这边刚刚平衡后，又接着往下走
+            return;
+        }
 
+        //  左子树高度 - 右子树高度 > 1 ，右旋
+        if (leftHeight() - rightHeight() > 1) {
+            //  如果左子树的右子树的高度 - 左子树的左子树的高度 > 1 ; 先左旋左子树节点
+            if (left != null && left.rightHeight() - left.leftHeight() > 1) {
+                //  先对当前节点的左子节点左旋
+                left.leftRotate();
+                //  再对当前节点右旋
+            } else {
+                //  直接右旋
+                rightRotate();
+            }
+        }
     }
 
     public void middleSort() {
